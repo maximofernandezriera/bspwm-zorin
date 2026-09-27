@@ -1,0 +1,259 @@
+# bspwm-zorin.dconf
+# Aproximacion a bspwm para Zorin OS 18.1 (GNOME Shell 46 + Zorin Tiling Shell 17.x)
+#
+# Aplicar (ver README.md):
+#   dconf dump / > ~/dconf-backup.dconf
+#   gnome-extensions disable zorin-tiling-shell@zorinos.com
+#   dconf load / < bspwm-zorin.dconf
+#   gnome-extensions enable zorin-tiling-shell@zorinos.com
+#   (cerrar sesion y volver a entrar)
+#
+# Las cabeceras [ruta] son rutas dconf relativas a "/".
+
+# ---------------------------------------------------------------------------
+# 1. TILING - Zorin Tiling Shell
+#    Esquema: org.gnome.shell.extensions.zorin-tiling-shell
+#    Ruta:    /org/gnome/shell/extensions/zorin-tiling-shell/
+# ---------------------------------------------------------------------------
+[org/gnome/shell/extensions/zorin-tiling-shell]
+# Tiling al arrastrar SIN tecla modificadora (-1=ninguna, 0=Ctrl, 1=Alt, 2=Super)
+enable-tiling-system=true
+tiling-system-activation-key=['-1']
+# Mantener Ctrl al arrastrar = soltar la ventana flotante
+tiling-system-deactivation-key=['0']
+# Alt al arrastrar = ocupar varias tiles
+enable-span-multiple-tiles=true
+span-multiple-tiles-activation-key=['1']
+# Ventanas nuevas -> primera tile libre del layout (~ autoinsert de bspwm)
+enable-autotiling=true
+# window_gap 12
+inner-gaps=uint32 12
+outer-gaps=uint32 12
+# Snap a bordes: 'default' = bordes -> mitades, esquinas -> cuartos
+active-screen-edges=true
+edge-tiling-mode='default'
+quarter-tiling-threshold=uint32 40
+edge-tiling-offset=uint32 16
+top-edge-maximize=false
+# Fuera extras no-bspwm
+enable-snap-assist=false
+snap-assist-sync-layout=false
+override-alt-tab=false
+override-window-menu=true
+enable-tiling-system-windows-suggestions=false
+enable-snap-assistant-windows-suggestions=false
+# Al tilear contra un borde, sugerir ventanas para el hueco restante
+enable-screen-edges-windows-suggestions=true
+enable-blur-snap-assistant=false
+enable-blur-selected-tilepreview=false
+snap-assistant-animation-time=uint32 0
+tile-preview-animation-time=uint32 0
+show-indicator=true
+# Borde de ventana enfocada (border_width 2, focused_border_color bspwm)
+enable-window-border=true
+window-border-width=uint32 2
+window-use-custom-border-color=true
+window-border-color='#817f7f'
+enable-smart-window-border-radius=false
+# Comportamiento del grupo tileado
+raise-together=true
+resize-complementing-windows=true
+restore-window-original-size=true
+enable-wraparound-focus=false
+enable-directional-focus-tiled-only=false
+# Atajos de la extension
+enable-move-keybindings=true
+focus-window-left=['<Super>Left']
+focus-window-down=['<Super>Down']
+focus-window-up=['<Super>Up']
+focus-window-right=['<Super>Right']
+focus-window-next=['<Super>c']
+focus-window-prev=['<Super><Shift>c']
+move-window-left=['<Super><Shift>Left']
+move-window-down=['<Super><Shift>Down']
+move-window-up=['<Super><Shift>Up']
+move-window-right=['<Super><Shift>Right']
+span-window-left=['<Super><Control>Left']
+span-window-down=['<Super><Control>Down']
+span-window-up=['<Super><Control>Up']
+span-window-right=['<Super><Control>Right']
+span-window-all-tiles=['']
+untile-window=['<Super>s']
+move-window-center=['<Super><Shift>s']
+highlight-current-window=['<Super><Shift>m']
+cycle-layouts=['<Super>space']
+cycle-layouts-backward=['<Shift><Super>space']
+# Layout "bspwm": espiral longest_side (1/2 | 1/4 arriba-dcha | 1/8 + 1/8 abajo-dcha)
+# seguido de los 6 layouts de Zorin.
+layouts-json='[{"id":"bspwm","tiles":[{"x":0,"y":0,"width":0.5,"height":1,"groups":[1]},{"x":0.5,"y":0,"width":0.5,"height":0.5,"groups":[1,2]},{"x":0.5,"y":0.5,"width":0.25,"height":0.5,"groups":[1,2,3]},{"x":0.75,"y":0.5,"width":0.25,"height":0.5,"groups":[2,3]}]},{"id":"Layout 1","tiles":[{"x":0,"y":0,"width":0.5,"height":1,"groups":[1]},{"x":0.5,"y":0,"width":0.5,"height":1,"groups":[1]}]},{"id":"Layout 2","tiles":[{"x":0,"y":0,"width":0.5,"height":0.5,"groups":[1,3]},{"x":0.5,"y":0,"width":0.5,"height":0.5,"groups":[2,1]},{"x":0.5,"y":0.5,"width":0.5,"height":0.5,"groups":[2,1]},{"x":0,"y":0.5,"width":0.5,"height":0.5,"groups":[3,1]}]},{"id":"Layout 3","tiles":[{"x":0,"y":0,"width":0.67,"height":1,"groups":[1]},{"x":0.67,"y":0,"width":0.33,"height":1,"groups":[1]}]},{"id":"Layout 4","tiles":[{"x":0,"y":0,"width":0.333,"height":1,"groups":[1]},{"x":0.333,"y":0,"width":0.333,"height":1,"groups":[2,1]},{"x":0.666,"y":0,"width":0.333,"height":1,"groups":[2]}]},{"id":"Layout 5","tiles":[{"x":0,"y":0,"width":0.5,"height":1,"groups":[1]},{"x":0.5,"y":0,"width":0.5,"height":0.5,"groups":[2,1]},{"x":0.5,"y":0.5,"width":0.5,"height":0.5,"groups":[2,1]}]},{"id":"Layout 6","tiles":[{"x":0,"y":0,"width":0.22,"height":0.5,"groups":[1,2]},{"x":0,"y":0.5,"width":0.22,"height":0.5,"groups":[1,2]},{"x":0.22,"y":0,"width":0.56,"height":1,"groups":[2,3]},{"x":0.78,"y":0,"width":0.22,"height":0.5,"groups":[3,4]},{"x":0.78,"y":0.5,"width":0.22,"height":0.5,"groups":[3,4]}]}]'
+# [workspace][monitor] -> layout. Con varios monitores: [['bspwm','bspwm'], ...]
+selected-layouts=[['bspwm'], ['bspwm'], ['bspwm'], ['bspwm'], ['bspwm']]
+
+# ---------------------------------------------------------------------------
+# 2. MUTTER - workspaces fijos, sin edge-tiling nativo, sin auto-maximizar
+# ---------------------------------------------------------------------------
+[org/gnome/mutter]
+dynamic-workspaces=false
+workspaces-only-on-primary=true
+# Lo gestiona Tiling Shell (active-screen-edges); la extension lo fuerza a false
+edge-tiling=false
+# El autotiling ignora ventanas maximizadas: no auto-maximizar
+auto-maximize=false
+center-new-windows=true
+attach-modal-dialogs=true
+# Super solo = modificador (no abre la vista general)
+overlay-key=''
+
+[org/gnome/mutter/keybindings]
+# Ocupados por Tiling Shell (la extension tambien los vacia al activarse)
+toggle-tiled-left=@as []
+toggle-tiled-right=@as []
+
+# ---------------------------------------------------------------------------
+# 3. ATAJOS DEL GESTOR DE VENTANAS (bspc node / bspc desktop)
+#    Esquema: org.gnome.desktop.wm.keybindings
+# ---------------------------------------------------------------------------
+[org/gnome/desktop/wm/keybindings]
+# bspc node -c (super + q como en el sxhkdrc de ejemplo)
+close=['<Super>q', '<Alt>F4']
+# bspc node -t fullscreen
+toggle-fullscreen=['<Super>f']
+# ~ bspc desktop -l monocle (solo la ventana enfocada)
+toggle-maximized=['<Super>m']
+# Liberados (los usa Tiling Shell con Super+Up/Down)
+maximize=@as []
+unmaximize=@as []
+# Super+Shift+flechas pasa a move-window (que ya salta de monitor)
+move-to-monitor-left=@as []
+move-to-monitor-right=@as []
+move-to-monitor-up=@as []
+move-to-monitor-down=@as []
+show-desktop=@as []
+# ~ node -g sticky
+toggle-on-all-workspaces=['<Super><Shift>y']
+# Liberado: con una sola fuente de entrada no hace nada y quitaba Super+Espacio
+switch-input-source=['XF86Keyboard']
+switch-input-source-backward=['<Shift>XF86Keyboard']
+# bspc desktop -f ^N
+switch-to-workspace-1=['<Super>1', '<Super>Home']
+switch-to-workspace-2=['<Super>2']
+switch-to-workspace-3=['<Super>3']
+switch-to-workspace-4=['<Super>4']
+switch-to-workspace-5=['<Super>5']
+switch-to-workspace-last=['<Super>End']
+# bspc node -d ^N
+move-to-workspace-1=['<Super><Shift>1', '<Super><Shift>Home']
+move-to-workspace-2=['<Super><Shift>2']
+move-to-workspace-3=['<Super><Shift>3']
+move-to-workspace-4=['<Super><Shift>4']
+move-to-workspace-5=['<Super><Shift>5']
+move-to-workspace-last=['<Super><Shift>End']
+# bspc desktop -f prev/next (Super+coma/punto: en teclado es los corchetes requieren AltGr)
+switch-to-workspace-left=['<Super>comma', '<Super>Page_Up']
+switch-to-workspace-right=['<Super>period', '<Super>Page_Down']
+switch-to-workspace-up=@as []
+switch-to-workspace-down=@as []
+# bspc node -d prev/next
+move-to-workspace-left=['<Super><Shift>comma', '<Super><Shift>Page_Up']
+move-to-workspace-right=['<Super><Shift>period', '<Super><Shift>Page_Down']
+move-to-workspace-up=@as []
+move-to-workspace-down=@as []
+
+# ---------------------------------------------------------------------------
+# 4. ATAJOS DE GNOME SHELL que chocan con los anteriores
+# ---------------------------------------------------------------------------
+[org/gnome/shell/keybindings]
+# Super+1..9 abria apps fijadas -> ahora son workspaces
+switch-to-application-1=@as []
+switch-to-application-2=@as []
+switch-to-application-3=@as []
+switch-to-application-4=@as []
+switch-to-application-5=@as []
+switch-to-application-6=@as []
+switch-to-application-7=@as []
+switch-to-application-8=@as []
+switch-to-application-9=@as []
+# Super+s -> untile (flotante)
+toggle-quick-settings=@as []
+# Super+m -> monocle
+toggle-message-tray=['<Super>v']
+# ~ lanzador (dmenu)
+toggle-overview=['<Super>d']
+# Parrilla de apps en la tecla de los 3 cuadrados (encima del 3, emite XF86LaunchA)
+toggle-application-view=['XF86LaunchA']
+# Capturas de pantalla (valores por defecto de GNOME, explicitos)
+show-screenshot-ui=['Print']
+screenshot=['<Shift>Print']
+screenshot-window=['<Alt>Print']
+show-screen-recording-ui=['<Ctrl><Shift><Alt>R']
+
+[org/gnome/shell/extensions/zorin-taskbar]
+# Atajos Super+N / Super+Shift+N del taskbar (por si se reactiva)
+hot-keys=false
+
+[org/gnome/settings-daemon/plugins/media-keys]
+# ~ bspc quit (super + alt + q): cerrar sesion con dialogo de confirmacion
+logout=['<Super><Alt>q', '<Control><Alt>Delete']
+screensaver=['<Super>l']
+# Super+a abre los Ajustes del sistema (gnome-control-center)
+control-center=['<Super>a']
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/bspwm-terminal/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/bspwm-poweroff/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/bspwm-brave/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/bspwm-calendar/']
+
+# Terminal: super + Return
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/bspwm-terminal]
+name='bspwm: terminal'
+command='gnome-terminal'
+binding='<Super>Return'
+
+# Apagar: super + w (dialogo de GNOME con confirmacion y cuenta atras)
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/bspwm-poweroff]
+name='bspwm: apagar'
+command='gnome-session-quit --power-off'
+binding='<Super>w'
+
+# Navegador: super + b (como "super + b; brave" en sxhkd)
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/bspwm-brave]
+name='bspwm: navegador'
+command='brave-origin-stable'
+binding='<Super>b'
+
+# Calendario: tecla F4 de los 6 cuadrados (encima del 4, emite XF86LaunchB)
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/bspwm-calendar]
+name='bspwm: calendario'
+command='gnome-calendar'
+binding='XF86LaunchB'
+
+# ---------------------------------------------------------------------------
+# 5. QUITAR ELEMENTOS NO-BSPWM
+# ---------------------------------------------------------------------------
+[org/gnome/desktop/interface]
+enable-animations=false
+enable-hot-corners=false
+zorin-display-overview-on-startup=false
+
+[org/gnome/desktop/wm/preferences]
+# 5 escritorios fijos (bspc monitor -d I II III IV V)
+num-workspaces=5
+workspace-names=['I', 'II', 'III', 'IV', 'V']
+# Sin botones en la barra de titulo (las CSD de GTK4/libadwaita no se ven afectadas)
+button-layout=':'
+action-double-click-titlebar='toggle-maximize'
+action-middle-click-titlebar='none'
+# focus_follows_pointer false (poner 'sloppy' para el equivalente a true)
+focus-mode='click'
+focus-new-windows='smart'
+# Super + arrastrar = mover, Super + clic derecho = redimensionar
+mouse-button-modifier='<Super>'
+resize-with-right-button=true
+
+[org/gnome/shell]
+# Solo lo minimo. OJO: dconf load reemplaza la lista completa.
+enabled-extensions=['zorin-tiling-shell@zorinos.com', 'zorin-appindicator@zorinos.com']
+disabled-extensions=['zorin-taskbar@zorinos.com', 'zorin-dash@zorinos.com', 'zorin-menu@zorinos.com', 'zorin-magic-lamp-effect@zorinos.com', 'zorin-window-move-effect@zorinos.com', 'zorin-desktop-cube@zorinos.com', 'zorin-desktop-icons@zorinos.com', 'zorin-spatial-window-switcher@zorinos.com', 'window-list@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com']
+disable-user-extensions=false
+
+[org/gnome/shell/window-switcher]
+current-workspace-only=true
+
+[org/gnome/shell/app-switcher]
+current-workspace-only=true
